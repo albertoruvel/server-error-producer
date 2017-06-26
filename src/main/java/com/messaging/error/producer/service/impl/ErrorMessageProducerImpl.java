@@ -57,6 +57,11 @@ public class ErrorMessageProducerImpl implements ErrorMessageProducer {
     }
 
     public Response sendErrorMessage(ErrorMessageRequest request) throws ServerMessagingException{
+        if(request.getApplicationId() == null || request.getApplicationId().isEmpty()){
+            throw new ServerMessagingException("No application id was provided");
+        }else if(request.getBody() == null || request.getBody().isEmpty()){
+            throw new ServerMessagingException("No error body was provided");
+        }
         final ErrorMessageResponse response = new ErrorMessageResponse();
         try{
             final String queueUrl = amazonSQS.getQueueUrl(errorQueueDestinationName).getQueueUrl();

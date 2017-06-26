@@ -20,7 +20,6 @@ public class ErrorMessageResource {
     @Inject
     private ErrorMessageProducer errorMessageProducer;
 
-
     @POST
     @Path("send")
     @Consumes(MediaType.APPLICATION_JSON)
